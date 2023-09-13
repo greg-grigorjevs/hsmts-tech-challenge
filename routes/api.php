@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('property', PropertyController::class);
+
+Route::group(['prefix' => 'room'], function () {
+    Route::get('/', [RoomController::class, 'index']);
+    Route::get('/{property}', [RoomController::class, 'indexByProperty']);
+    Route::post('/', [RoomController::class, 'store']);
+    Route::put('/{room}', [RoomController::class, 'update']);
+    Route::delete('/{room}', [RoomController::class, 'destroy']);
+});
