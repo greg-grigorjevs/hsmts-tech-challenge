@@ -49,6 +49,7 @@ class RoomController extends Controller
         return inertia('Room/Edit', [
             'room' => $room,
             'update_url' => route('api.room.update', $room),
+            'property' => $room->property
         ]);
     }
 }

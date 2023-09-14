@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Link, router } from '@inertiajs/react'
 
-export default function Edit({ room, update_url }) {
+export default function Edit({ room, property, update_url }) {
     const [data, setData] = useState({
         name: room.name || '',
         size: room.size || '',
@@ -39,7 +39,7 @@ export default function Edit({ room, update_url }) {
 
                     <div>
                         <input type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" />
-                        <Link href={route('property.index')} as="button" className="ml-2 border border-gray-300 hover:bg-gray-100 rounded-lg font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Cancel</Link>
+                        <Link href={route('room.indexByProperty', property.id)} as="button" className="ml-2 border border-gray-300 hover:bg-gray-100 rounded-lg font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Cancel</Link>
                     </div>
                 </form>
             </div>
