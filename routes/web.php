@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,4 +20,11 @@ use Inertia\Inertia;
 
 // Properties
 Route::resource('property', PropertyController::class)->only(['index', 'create', 'edit']);
+
+// Rooms
+Route::resource('room', RoomController::class)->only(['edit']);
+Route::get('room/create/{property}', [RoomController::class, 'create'])->name('room.create');
+Route::get('room/{property}', [RoomController::class, 'indexByProperty'])->name('room.indexByProperty');
+
+
 

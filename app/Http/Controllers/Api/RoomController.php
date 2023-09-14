@@ -24,14 +24,6 @@ class RoomController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -46,23 +38,8 @@ class RoomController extends Controller
         $newRoom->fill($request->only($newRoom->getFillable()));
         $newRoom->save();
 
-        return new RoomResource($newRoom);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Room $room)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Room $room)
-    {
-        //
+        /* return new RoomResource($newRoom); */
+        return redirect(route('room.indexByProperty', $request->input('property_id')));
     }
 
     /**
@@ -76,6 +53,8 @@ class RoomController extends Controller
         ]);
 
         $room->update($request->only($room->getFillable()));
+
+        return redirect(route('room.indexByProperty', $room->property->id), 303);
     }
 
     /**
@@ -83,6 +62,10 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
+        $propertyId = $room->property->id;
+
         $room->delete();
+
+        return redirect(route('room.indexByProperty', $propertyId), 303);
     }
 }
