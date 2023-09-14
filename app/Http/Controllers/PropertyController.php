@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PropertyResource;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
@@ -13,7 +12,20 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return PropertyResource::collection(Property::paginate(10));
+        $properties = Property::query()->orderBy('created_at', 'DESC')->paginate(10)->through(function (Property $property) {
+            return [
+                'id' => $property->id,
+                'name' => $property->name,
+                'address' => $property->address,
+                'edit_url' => route('property.edit', $property),
+                'delete_url' => route('api.property.destroy', $property)
+            ];
+        });
+
+        return inertia('Property/Index', [
+            'properties' => $properties,
+            'create_url' => route('property.create')
+        ]);
     }
 
     /**
@@ -21,54 +33,18 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Property/Create', ['store_url' => route('api.property.store')]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255']
-        ]);
-
-
-        $property = new Property();
-        $property->fill($request->only($property->getFillable()));
-        $property->save();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Property $property)
-    {
-        return new PropertyResource($property);
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Property $property)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Property $property)
-    {
-        $property->update($request->only($property->getFillable()));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Property $property)
-    {
-        $property->delete();
+        return inertia('Property/Edit', [
+            'property' => $property,
+            'update_url' => route('api.property.update', $property),
+        ]);
     }
 }
