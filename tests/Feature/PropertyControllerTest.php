@@ -41,7 +41,7 @@ class PropertyControllerTest extends TestCase
 
         $response = $this->post('/api/property', $data);
 
-        $response->assertOk();
+        $response->assertStatus(303);
 
         $this->assertDatabaseCount('properties', 1);
         $this->assertDatabaseHas('properties', $data);
@@ -63,7 +63,7 @@ class PropertyControllerTest extends TestCase
 
         $response = $this->put("/api/property/$property->id", $newData);
 
-        $response->assertOk();
+        $response->assertStatus(303);
 
         $this->assertDatabaseHas('properties', $newData);
         $this->assertDatabaseMissing('properties', $oldData);
@@ -91,7 +91,7 @@ class PropertyControllerTest extends TestCase
 
         $response = $this->delete("/api/property/$property->id");
 
-        $response->assertOk();
+        $response->assertStatus(303);
 
         $this->assertDatabaseEmpty('properties');
     }

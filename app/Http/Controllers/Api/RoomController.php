@@ -38,8 +38,7 @@ class RoomController extends Controller
         $newRoom->fill($request->only($newRoom->getFillable()));
         $newRoom->save();
 
-        /* return new RoomResource($newRoom); */
-        return redirect(route('room.indexByProperty', $request->input('property_id')));
+        return redirect(route('room.indexByProperty', $request->input('property_id')), 303);
     }
 
     /**

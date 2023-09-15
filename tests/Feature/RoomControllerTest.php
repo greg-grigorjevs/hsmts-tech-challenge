@@ -68,7 +68,7 @@ class RoomControllerTest extends TestCase
 
         $response = $this->post('/api/room', $data);
 
-        $response->assertCreated();
+        $response->assertStatus(303);
 
         $this->assertDatabaseCount('rooms', 1);
         $this->assertDatabaseHas('rooms', $data);
@@ -92,7 +92,7 @@ class RoomControllerTest extends TestCase
 
         $response = $this->put("/api/room/$room->id", $newData);
 
-        $response->assertOk();
+        $response->assertStatus(303);
 
         $this->assertDatabaseHas('rooms', $newData);
         $this->assertDatabaseMissing('rooms', $oldData);
@@ -104,7 +104,7 @@ class RoomControllerTest extends TestCase
 
         $response = $this->delete("/api/room/$room->id");
 
-        $response->assertOk();
+        $response->assertStatus(303);
 
         $this->assertDatabaseEmpty('rooms');
     }
