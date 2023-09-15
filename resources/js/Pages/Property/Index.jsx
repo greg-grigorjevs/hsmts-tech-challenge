@@ -8,7 +8,7 @@ export default function Index({ properties, create_url }) {
 
     return (
         <>
-            <div className="m-10 overflow-x-auto bg-white rounded shadow">
+            <div className="m-10 overflow-x-auto bg-white rounded">
                 <h1 className="font-medium text-3xl mb-3">Properties</h1>
                 <table className="border border-gray-300 w-full whitespace-nowrap divide-y divide-gray-200 mb-2 ">
                     <thead>

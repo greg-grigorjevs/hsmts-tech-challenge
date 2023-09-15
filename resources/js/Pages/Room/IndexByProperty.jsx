@@ -8,7 +8,7 @@ export default function IndexByPropety({ property, rooms, create_url }) {
 
     return (
         <>
-            <div className="m-10 overflow-x-auto bg-white rounded shadow">
+            <div className="m-10 overflow-x-auto bg-white">
                 <h1 className="font-medium text-3xl mb-5">Rooms at {property.name}</h1>
                 <table className="border border-gray-300 w-full whitespace-nowrap divide-y divide-gray-200 mb-2 ">
                     <thead>
@@ -45,8 +45,8 @@ export default function IndexByPropety({ property, rooms, create_url }) {
                     </tbody>
                 </table>
                 <Pagination links={links} />
-            <Link href={create_url} as="button" className="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Room to Property</Link>
-            <Link href={route('property.index')} as="button" className="ml-2 border border-gray-300 hover:bg-gray-100 rounded-lg font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Back</Link>
+                <Link href={create_url} as="button" className="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Room to Property</Link>
+                <Link href={route('property.index')} as="button" className="ml-2 border border-gray-300 hover:bg-gray-100 rounded-lg font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Back</Link>
             </div>
 
         </>
