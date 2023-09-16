@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
 
 import { Link, router } from '@inertiajs/react'
+import { Property, Room } from '@/types'
 
-export default function Edit({ room, property, update_url }) {
+type Props = {
+    room: Room,
+    property: Property,
+    update_url: string
+}
+
+export default function Edit({ room, property, update_url }: Props) {
     const [data, setData] = useState({
         name: room.name || '',
         size: room.size || '',
     })
 
-    function handleChange(e) {
-        const key = e.target.id
-        const value = e.target.value
+    function handleChange(e: React.FormEvent<HTMLInputElement>) {
+        const key = e.currentTarget.id
+        const value = e.currentTarget.value
 
         setData(data => ({
             ...data,
@@ -18,7 +25,7 @@ export default function Edit({ room, property, update_url }) {
         }))
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault()
         router.put(update_url, data)
     }

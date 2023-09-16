@@ -3,6 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "typecheck": "tsc",
         "build": "tsc && vite build"
     },
     "devDependencies": {

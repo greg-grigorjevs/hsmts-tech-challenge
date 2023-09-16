@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 
 import { Link, router } from '@inertiajs/react'
+import { CreateProps } from '@/types'
 
-export default function Create({ store_url }) {
+export default function Create({ store_url }: {store_url: string}) {
 
     const [data, setData] = useState({
         name: '',
         address: '',
     })
 
-    function handleChange(e) {
-        const key = e.target.id
-        const value = e.target.value
+    function handleChange(e: React.FormEvent<HTMLInputElement>) {
+        const key = e.currentTarget.id
+        const value = e.currentTarget.value
 
         setData(data => ({
             ...data,
@@ -19,7 +20,7 @@ export default function Create({ store_url }) {
         }))
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault()
         router.post(store_url, data)
     }

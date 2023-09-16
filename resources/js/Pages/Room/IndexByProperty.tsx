@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from '@inertiajs/react'
 import Pagination from '@/Shared/Pagination'
+import { Paginated, Property, Room } from '@/types';
 
+type Props = {
+    property: Property,
+    rooms: Paginated<Room>,
+    create_url: string
+}
 
-export default function IndexByPropety({ property, rooms, create_url }) {
+export default function IndexByPropety({ property, rooms, create_url }: Props) {
     const { data, links } = rooms
 
     return (
@@ -34,10 +40,10 @@ export default function IndexByPropety({ property, rooms, create_url }) {
                                         {size}
                                     </td>
                                     <td className="border-t">
-                                        <Link href={edit_url} method="get" className="hover:text-yellow-800">Edit</Link>
+                                        <Link href={edit_url!} method="get" className="hover:text-yellow-800">Edit</Link>
                                     </td>
                                     <td className="border-t">
-                                        <Link href={delete_url} method="delete" as="button" className="hover:text-red-600">Delete</Link>
+                                        <Link href={delete_url!} method="delete" as="button" className="hover:text-red-600">Delete</Link>
                                     </td>
                                 </tr>
                             )

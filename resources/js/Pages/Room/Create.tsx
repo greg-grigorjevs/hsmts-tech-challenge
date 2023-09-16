@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { Link, useForm } from '@inertiajs/react'
+import { Property } from '@/types';
 
-export default function Create({ property, store_url }) {
+export default function Create({ property, store_url }: {property: Property, store_url: string}) {
 
     const {data, setData, post, errors} = useForm({
         name: '',
@@ -11,9 +12,9 @@ export default function Create({ property, store_url }) {
     });
 
 
-    function handleChange(e) {
-        const key = e.target.id
-        const value = e.target.value
+    function handleChange(e: React.FormEvent<HTMLInputElement>) {
+        const key = e.currentTarget.id
+        const value = e.currentTarget.value
 
         setData(data => ({
             ...data,
@@ -21,9 +22,9 @@ export default function Create({ property, store_url }) {
         }))
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault()
-        post(store_url, data)
+        post(store_url)
     }
 
 

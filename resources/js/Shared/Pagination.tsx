@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import classNames from 'classnames';
+import {PaginateLink} from '@/types'
 
-const PageLink = ({ active, label, url }) => {
+const PageLink = ({ active, label, url } : PaginateLink) => {
   const className = classNames(
     [
       'mr-1 mb-1',
@@ -26,16 +27,16 @@ const PageLink = ({ active, label, url }) => {
 // Previous, if on first page
 // Next, if on last page
 // and dots, if exists (...)
-const PageInactive = ({ label }) => {
+const PageInactive = ({ label }: Partial<PaginateLink>) => {
   const className = classNames(
     'mr-1 mb-1 px-4 py-3 text-sm border rounded border-solid border-gray-300 text-gray'
   );
   return (
-    <div className={className} dangerouslySetInnerHTML={{ __html: label }} />
+    <div className={className} dangerouslySetInnerHTML={{ __html: label! }} />
   );
 };
 
-export default ({ links = [] }) => {
+export default ({ links = [] }: {links: PaginateLink[]}) => {
   // dont render, if there's only 1 page (previous, 1, next)
   if (links.length === 3) return null;
   return (
